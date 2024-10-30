@@ -140,7 +140,7 @@ void MainWindow::setupUi() {
   icon4.addFile(QString::fromUtf8(":/images/reloc2.svg"),
                 QSize(64, 64), QIcon::Normal, QIcon::Off);
   reloc_btn->setIcon(icon4);
-  reloc_btn->setText("重定位");
+  reloc_btn->setText("재배치");
   // reloc_btn->setMaximumSize(QSize(54, 54));
   reloc_btn->setIconSize(QSize(32, 32));
   horizontalLayout_tools->addWidget(reloc_btn);
@@ -149,7 +149,7 @@ void MainWindow::setupUi() {
                 QSize(64, 64), QIcon::Normal, QIcon::Off);
   QToolButton *edit_map_btn = new QToolButton();
   edit_map_btn->setIcon(icon5);
-  edit_map_btn->setText("编辑地图");
+  edit_map_btn->setText("지도 편집");
   // edit_map_btn->setMaximumSize(QSize(54, 54));
   edit_map_btn->setIconSize(QSize(32, 32));
   edit_map_btn->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
@@ -171,7 +171,7 @@ void MainWindow::setupUi() {
                 QSize(64, 64), QIcon::Normal, QIcon::Off);
   QToolButton *open_map_btn = new QToolButton();
   open_map_btn->setIcon(icon6);
-  open_map_btn->setText("打开地图");
+  open_map_btn->setText("지도 열기");
   // open_map_btn->setMaximumSize(QSize(54, 54));
   open_map_btn->setIconSize(QSize(32, 32));
   open_map_btn->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
@@ -193,7 +193,7 @@ void MainWindow::setupUi() {
                 QSize(64, 64), QIcon::Normal, QIcon::Off);
   QToolButton *save_map_btn = new QToolButton();
   save_map_btn->setIcon(icon7);
-  save_map_btn->setText("保存地图");
+  save_map_btn->setText("지도 저장");
   // save_map_btn->setMaximumSize(QSize(54, 54));
   save_map_btn->setIconSize(QSize(32, 32));
   save_map_btn->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
@@ -275,7 +275,7 @@ void MainWindow::setupUi() {
       "QToolButton:pressed {"
       "   background-color: lightblue;"
       "}");
-  normal_cursor_btn->setToolTip("鼠标");
+  normal_cursor_btn->setToolTip("마우스");
   normal_cursor_btn->setCursor(Qt::PointingHandCursor);
   normal_cursor_btn->setIconSize(QSize(32, 32));
 
@@ -296,7 +296,7 @@ void MainWindow::setupUi() {
       "QToolButton:pressed {"
       "   background-color: lightblue;"
       "}");
-  add_point_btn->setToolTip("添加工位点");
+  add_point_btn->setToolTip("작업 지점 추가");
   add_point_btn->setCursor(Qt::PointingHandCursor);
   add_point_btn->setIconSize(QSize(32, 32));
 
@@ -315,7 +315,7 @@ void MainWindow::setupUi() {
       "QToolButton:pressed {"
       "   background-color: lightblue;"
       "}");
-  add_topology_path_btn->setToolTip("连接工位点");
+  add_topology_path_btn->setToolTip("작업 지점 연결");
   add_topology_path_btn->setCursor(Qt::PointingHandCursor);
   add_topology_path_btn->setIconSize(QSize(32, 32));
 
@@ -336,7 +336,7 @@ void MainWindow::setupUi() {
       "QToolButton:pressed {"
       "   background-color: lightblue;"
       "}");
-  add_region_btn->setToolTip("添加区域");
+  add_region_btn->setToolTip("영역 추가");
   add_region_btn->setCursor(Qt::PointingHandCursor);
   add_region_btn->setIconSize(QSize(32, 32));
 
@@ -385,7 +385,7 @@ void MainWindow::setupUi() {
       "QToolButton:pressed {"
       "   background-color: lightblue;"
       "}");
-  draw_pen_btn->setToolTip("线条");
+  draw_pen_btn->setToolTip("선 그리기");
   draw_pen_btn->setCursor(Qt::PointingHandCursor);
   draw_pen_btn->setIconSize(QSize(32, 32));
 
@@ -406,7 +406,7 @@ void MainWindow::setupUi() {
       "QToolButton:pressed {"
       "   background-color: lightblue;"
       "}");
-  draw_line_btn->setToolTip("线条");
+  draw_line_btn->setToolTip("선 그리기");
   draw_line_btn->setCursor(Qt::PointingHandCursor);
   draw_line_btn->setIconSize(QSize(32, 32));
 
@@ -618,38 +618,38 @@ void MainWindow::setupUi() {
                                                     "", "Map files (*.yaml,*.pgm,*.pgm.json)");
     if (!fileName.isEmpty()) {
       // 用户选择了文件夹，可以在这里进行相应的操作
-      LOG_INFO("用户选择的保存地图路径：" << fileName.toStdString());
+      LOG_INFO("사용자가 선택한 지도 저장 경로: " << fileName.toStdString());
       display_manager_->SaveMap(fileName.toStdString());
     } else {
       // 用户取消了选择
-      LOG_INFO("取消保存地图");
+      LOG_INFO("지도 저장 취소");
     }
   });
   connect(open_map_btn, &QToolButton::clicked, [this]() {
     QStringList filters;
     filters
-        << "地图(*.yaml)"
-        << "拓扑地图(*.topology)";
+        << "지도(*.yaml)"
+        << "토폴로지 지도(*.topology)";
 
     QString fileName = QFileDialog::getOpenFileName(nullptr, "OPen Map files",
                                                     "", filters.join(";;"));
     if (!fileName.isEmpty()) {
       // 用户选择了文件夹，可以在这里进行相应的操作
-      LOG_INFO("用户选择的打开地图路径：" << fileName.toStdString());
+      LOG_INFO("사용자가 선택한 지도 열기 경로: " << fileName.toStdString());
       display_manager_->OpenMap(fileName.toStdString());
     } else {
       // 用户取消了选择
-      LOG_INFO("取消打开地图");
+      LOG_INFO("지도 열기 취소");
     }
   });
   connect(edit_map_btn, &QToolButton::clicked, [this, tools_edit_map_widget, edit_map_btn]() {
-    if (edit_map_btn->text() == "编辑地图") {
+    if (edit_map_btn->text() == "지도 편집") {
       display_manager_->SetEditMapMode(Display::MapEditMode::kNormal);
-      edit_map_btn->setText("结束编辑");
+      edit_map_btn->setText("편집 종료");
       tools_edit_map_widget->show();
     } else {
       display_manager_->SetEditMapMode(Display::MapEditMode::kStop);
-      edit_map_btn->setText("编辑地图");
+      edit_map_btn->setText("지도 편집");
       tools_edit_map_widget->hide();
     }
   });
