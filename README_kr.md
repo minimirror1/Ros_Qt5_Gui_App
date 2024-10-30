@@ -135,31 +135,31 @@ sudo chmod a+x ./ros_qt5_gui_app
 ./ros_qt5_gui_app
 ```
 
-# 二,编译
+# 2, 컴파일
 
 
 >💡 注意，为了保证此项目同时兼容ROS1与ROS2，此项目不使用ROS1/ROS2的catkin_make/colcon构建系统进行够建，而是使用标准CMake进行构建，这也就意味着，本项目不会被ROS自动识别为功能包
 
 [bilibili教程](https://www.bilibili.com/video/BV1ex4y1a7or/?vd_source=75c00cfe4b6a37d574e447ad1e864d29)
 
-可以参考以下教程从0开始构建/运行此项目:
+다음 가이드를 참조하여 이 프로젝트를 처음부터 구축/실행할 수 있습니다:
 
-## 1,环境安装 
+## 1,환경 설치 
 
-理论上只需要安装如下基础包就可以编译此项目:
+일반적으로는 다음 기본 패키지만 설치하면 이 프로젝트를 컴파일할 수 있습니다:
 
 ```
 sudo apt-get update
 sudo apt-get install qtbase5-private-dev libqt5svg5-dev libsdl-image1.2-dev libsdl1.2-dev -y
 ```
 
-如果以上安装后还不行，可以执行如下指令安装全部依赖:
+만약 위의 설치 후에도 작동하지 않는다면, 다음 명령어를 실행하여 모든 종속성을 설치할 수 있습니다:
 
 ```
 sudo apt-get install qtbase5-dev qt5-qmake qtbase5-dev-tools libqt5svg5-dev qtbase5-private-dev libeigen3-dev libgtest-dev libsdl-image1.2-dev libsdl1.2-dev -y
 ```
 
-## 2,克隆/下载本项目:
+## 2,프로젝트 클론/다운로드:
 
 
 ```
@@ -168,16 +168,18 @@ cd ~/qt_ws
 git clone https://github.com/chengyangkj/Ros_Qt5_Gui_App
 ```
 
-note:如果github下载过慢,可以使用以下指令从gitee拉取
+// 주의: GitHub에서 다운로드 속도가 느릴 경우, 아래 명령어를 사용하여 Gitee에서 가져올 수 있습니다.
 
 ```
 git clone https://gitee.com/chengyangkj/Ros_Qt5_Gui_App
 
 ```
 
-## 3,编译项目
 
-可以手动执行如下命令进行编译(会根据环境变量自动识别ROS1还是ROS2环境):
+## 3, 프로젝트 컴파일
+
+다음 명령어를 수동으로 실행하여 컴파일할 수 있습니다(환경 변수에 따라 자동으로 ROS1 또는 ROS2 환경을 인식합니다):
+
 ```
 cd ~/qt_ws/ROS2_Qt5_Gui_App
 mkdir -p build
@@ -186,7 +188,8 @@ cmake ..
 make
 
 ```
-或者执行如下脚本手动指定ROS版本并进行一键编译:
+
+또는 아래 스크립트를 실행하여 ROS 버전을 수동으로 지정하고 원클릭 컴파일을 수행할 수 있습니다:
 
 ```
 cd ~/qt_ws/ROS2_Qt5_Gui_App
@@ -198,57 +201,56 @@ ROS1:
 sh ./build_ros1.sh
 
 ```
-ROS2
+ROS2:
 
 ```
 sh ./build_ros2.sh
 ```
-## 4,运行项目
 
+## 4, 프로젝트 실행
 ```
 cd ~/qt_ws/ROS2_Qt5_Gui_App/build
 ./ros_qt5_gui_app
 
 ```
 
-软件配置文件路径(运行一次软件后会自动生成在可执行程序相对路径下)
 
-# 三,IDE配置说明(QtCreator/Vscode)
+소프트웨어 구성 파일 경로(소프트웨어를 한 번 실행하면 실행 파일의 상대 경로에 자동으로 생성됩니다)
 
+# 3. IDE 설정 설명(QtCreator/Vscode)
 
->💡  此部分为针对新手做的温馨提示,如果你已经是一个ROS/C++/Qt老手,可以跳过此部分
+>💡 이 부분은 초보자를 위한 친절한 안내입니다. ROS/C++/Qt 숙련자라면 이 부분을 건너뛰어도 됩니다.
 
+많은 ROS 초보자들이 Qt를 배울 때 IDE와 컴파일러의 차이를 이해하지 못하는 오해가 있습니다. QtCreator, VSCode, CLion 등은 모두 IDE([IDE란 무엇인가](https://www.zhihu.com/question/24833708))입니다.
+IDE가 없어도 텍스트 편집기만으로도 코드를 작성할 수 있습니다(효율성이 낮고 코드 제안이 없음). 작성 후 make 명령어로 컴파일하면 됩니다.
 
-很多ROS初学者学习Qt都存在一个误区:没有搞清楚IDE与编译器的区别，像QtCreator，Vscode，CLion之类的均为IDE（[什么是IDE](https://www.zhihu.com/question/24833708)）
-哪怕不用IDE，我们只用文本编辑器也能实现代码的编写(效率很低，没有代码提示)，编写之后使用make指令编译即可
+실제로 Ubuntu 시스템에는 기본적으로 Qt 라이브러리가 포함되어 있습니다. 앞서 [3. 프로젝트 컴파일](#3프로젝트-컴파일)에서 보았듯이 QtCreator를 설치할 필요 없이 apt-get으로 시스템에 없는 Qt 라이브러리만 설치하면 정상적으로 컴파일할 수 있습니다.
 
-实际上Ubuntu系统默认都自带的有Qt库,就比如前面的[3,编译项目](#3编译项目),并没有要求安装QtCreator,只需要使用apt-get安装一些系统缺失的,没有默认安装的qt库,就能正常编译通过
+물론 QtCreator를 설치할 때 일부 Qt 라이브러리도 함께 다운로드되지만, 이는 단순히 다운로드일 뿐입니다. 다운로드한 라이브러리를 환경 변수에 추가하지 않으면(보통 시스템 기본 Qt 라이브러리와 추가한 Qt 라이브러리 간의 충돌 문제를 처리해야 하므로 권장하지 않음), QtCreator를 다운로드했더라도 코드 컴파일 시에는 여전히 시스템 기본 라이브러리를 사용합니다.
 
-当然安装QtCreator时也会同时下载一些Qt库,但是他仅仅是下载,如果你没有将下载的库添加到环境变量中(通常也不建议自己将下载的qt库添加到环境变量中,这样需要处理系统默认的qt库与你添加的qt库的冲突问题),所以,在没有额外配置的情况下,虽然下载了QtCreator,但是在编译代码时用的还是系统默认的库.
+그렇다면 왜 QtCreator를 추가로 다운로드해야 할까요?
 
-那么,我们为什么还要去额外下载QtCreator呢?
+(.ui), (.resource) 파일을 편집하기 위해 QtCreator가 필요하며, QtCreator는 코드 제안, 코드 이동 등의 기능도 제공합니다. 하지만 이러한 기능은 모든 IDE가 가지고 있으며, VSCode/CLion에 플러그인을 설치해도 이러한 기능을 구현할 수 있습니다. 다만 QtCreator가 자사 언어를 더 잘 지원하고 더 편리할 뿐입니다.
 
-因为我们需要使用QtCreator去编辑我们的(.ui),(.resource)文件，同时QtCreator还提供了代码提示，代码跳转等功能。但是这些功能，只要是IDE均有这个功能，我们通过Vscode/Clion安装一些插件，也是能够实现这些功能，只是QtCreator对自家的语言支持的比较好，比较方便
+이 프로젝트의 모든 인터페이스는 코드에서 수동으로 생성됩니다. mainwindow.ui를 열어보면 아무것도 없는 것을 볼 수 있는데, 이는 모든 인터페이스가 코드로 동적 생성되어 추가되기 때문입니다.
 
-本项目所有的界面,都是在代码中去手动创建,如果打开代码中的mainwindow.ui可以发现什么都没有,因为所有界面都是代码动态创建添加上去的.
+본인의 프로젝트 개발 과정:
+ - 시스템 Qt 라이브러리 사용, 필요한 Qt 라이브러리가 없는 경우 apt-get으로 설치
+ - 모든 UI 인터페이스는 코드로 동적 생성하여 메인 윈도우에 추가, QtCreator 드래그 앤 드롭 생성 방식 미사용
+ - 개발 IDE로 VSCode 사용, 기본 C/C++ 플러그인만 설치하여 코드 제안 기능 사용
+ - 리소스 파일(.qrc) 편집이 필요한 경우 수동으로 QtCreator를 열어 qrc 파일 편집 후 저장
+ - 컴파일은 터미널에서 make 명령어 사용
+ - 실행은 터미널에서 ./ros_qt5_gui_app 명령어 사용
 
-本人在开发本项目的流程为:
- - 使用系统的Qt库,如果需要使用的qt库不存在,则使用apt-get安装即可
- - 所有ui界面均使用代码动态创建,并添加到主窗口中,没有使用qtcreator拖拽生成
- - 项目的开发IDE使用vscode,仅安装了基础的c/c++插件做代码提示
- - 如果需要编辑资源文件(.qrc),手动打开qtcreator,再打开qrc文件进行编辑保存
- - 编译时在终端使用make指令进行编译
- - 运行时在终端使用./ros_qt5_gui_app指令进行运行
+보시다시피 이 프로젝트는 리소스 파일을 편집할 때만 QtCreator가 필요합니다(일반적으로 이미지를 추가한 후에는 자주 편집하지 않음)
 
-可以发现,开发此项目只有需要编辑资源文件时才会用到QtCreator(一般图片添加上去后也不会做频繁的编辑)
+본인은 VSCode를 사용하여 개발했지만, QtCreator를 사용하여 개발하는 것을 선호하는 사용자를 위해 QtCreator로 이 프로젝트를 개발하는 방법을 소개하겠습니다:
 
-虽然本人开发使用的Vscode,但是为了方便部分习惯使用QtCreator做开发的用户,这里介绍下如果使用QtCreator作为IDE开发此项目:
+### 3.1 QtCreator로 프로젝트 열기 튜토리얼
 
-### 3.1 QtCreator打开项目教程
+먼저 [3. 프로젝트 컴파일](#3프로젝트-컴파일)에 따라 프로젝트를 성공적으로 컴파일해야 합니다. 컴파일에 실패하면 QtCreator에서 프로젝트가 정상적으로 열리지 않습니다.
 
-首先需要按照[3,编译项目](#3编译项目)将项目成功编译,如果编译失败,则QtCreator打开后项目不会正常展开
-
-本项目为标准CMake项目,因此按照在QtCreator中打开CMake项目的方式,打开本项目的根目录Cmakelist.txt即可(不区分ROS1/ROS2)
+이 프로젝트는 표준 CMake 프로젝트이므로 QtCreator에서 CMake 프로젝트를 여는 방식으로 프로젝트 루트 디렉토리의 CMakeLists.txt를 열면 됩니다(ROS1/ROS2 구분 없음)
 
 - 1.安装QtCreator
 
