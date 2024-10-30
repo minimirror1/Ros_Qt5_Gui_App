@@ -5,8 +5,8 @@
  * @LastEditTime: 2023-10-06 14:03:03
  * @FilePath: /ROS2_Qt5_Gui_App/README.md
 -->
-简体中文 | [English](./README_en.md) | [한국어](./README_kr.md)
-*轻量级ROS1/ROS2移动机器人人机交互软件*
+Simplified Chinese | [한국어](./README_kr.md)
+*경량 ROS1/ROS2 이동 로봇 HMI 소프트웨어*
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/chengyangkj/Ros_Qt5_Gui_App?style=flat-square)
 ![GitHub stars](https://img.shields.io/github/stars/chengyangkj/Ros_Qt5_Gui_App?style=flat-square)
@@ -32,42 +32,40 @@
 </a>
 -->
 
+이 프로젝트는 Qt5를 기반으로 개발되었으며 CMake로 빌드되어 동일한 코드베이스로 ROS1/ROS2 시스템에서 사용할 수 있습니다(본 프로젝트는 CI가 통합되어 여러 ROS 버전/시스템 버전에서의 사용성을 보장합니다).
 
-本项目基于Qt5开发，基于CMake进行构建，可以实现一套代码同时在ROS1/ROS2系统中使用(本项目已接入CI,保证多ROS版本/系统版本可用性)
+소프트웨어는 컴파일 시 환경 변수에서 ROS1/ROS2 환경을 자동으로 감지하여 빌드하며, ROS 통신과 인터페이스를 분리합니다.
 
-软件在编译时会自动识别环境变量中的ROS1/ROS2环境并进行构建，实现ROS通信与界面隔离
+소프트웨어의 모든 기능은 자체적으로 구현되어 있어 성능이 낮은 엣지 디바이스에서도 쉽게 실행할 수 있습니다.
 
-软件所有功能均为自行绘制实现,因此可以轻松运行在一些性能比较低的边缘设备
+기능/TODO:
 
-功能/TODO:
-  
-| 功能                        | 状态 | 备注                 |
-| --------------------------- | ---- | -------------------- |
-| ROS1/ROS2通信               | ✅    |                      |
-| 全局/局部地图显示           | ✅    |                      |
-| 机器人实时位置显示          | ✅    |                      |
-| 机器人速度仪表盘            | ✅    |                      |
-| 机器人手动控制              | ✅    |                      |
-| 机器人重定位                | ✅    |                      |
-| 机器人单点/多点导航         | ✅    |                      |
-| 机器人全局/局部规划轨迹显示 | ✅    |                      |
-| 机器人拓扑地图功能          | ✅    |                      |
-| 电池电量显示                | ✅    |                      |
-| 地图编辑功能                | ✅    |                      |
-| 机器人导航任务链            | ✅    | 尚存bug              |
-| 地图加载                    | ✅    |                      |
-| 地图保存                    | ✅    |                      |
-| 相机图像显示                | ✅    | 移植自rqt_image_view |
-| 机器人车身轮廓显示          | ✅    | 支持配置异形车身     |
-| 基于rosbridge的通信         | ✍    |                      |
-| 3D图层显示                  | 🏷️    |                      |
-| 拓扑点位的路径规划          | 🏷️    |                      |
-| 机器人历史轨迹录制          | 🏷️    |                      |
+| 기능                          | 상태 | 비고                 |
+| ---------------------------- | ---- | -------------------- |
+| ROS1/ROS2 통신               | ✅    |                      |
+| 전역/지역 지도 표시           | ✅    |                      |
+| 로봇 실시간 위치 표시         | ✅    |                      |
+| 로봇 속도 대시보드            | ✅    |                      |
+| 로봇 수동 제어               | ✅    |                      |
+| 로봇 재위치 설정             | ✅    |                      |
+| 로봇 단일/다중 지점 내비게이션 | ✅    |                      |
+| 로봇 전역/지역 경로 계획 표시  | ✅    |                      |
+| 로봇 토폴로지 맵 기능         | ✅    |                      |
+| 배터리 잔량 표시             | ✅    |                      |
+| 지도 편집 기능               | ✅    |                      |
+| 로봇 내비게이션 작업 체인     | ✅    | 버그 존재             |
+| 지도 로드                    | ✅    |                      |
+| 지도 저장                    | ✅    |                      |
+| 카메라 이미지 표시           | ✅    | rqt_image_view에서 이식 |
+| 로봇 차체 윤곽 표시          | ✅    | 비정형 차체 구성 지원   |
+| rosbridge 기반 통신          | ✍    |                      |
+| 3D 레이어 표시              | 🏷️    |                      |
+| 토폴로지 위치 경로 계획      | 🏷️    |                      |
+| 로봇 이동 경로 기록          | 🏷️    |                      |
 
+흥미로운 인터페이스나 기능 요구사항이 있으시다면 [여기](https://github.com/chengyangkj/Ros_Qt5_Gui_App/issues/29)에 제안해 주시기 바랍니다. 버그가 있다면 [issues](https://github.com/chengyangkj/Ros_Qt5_Gui_App/issues)에 제보해 주시면 최대한 빨리 수정하도록 하겠습니다! 또한 Merge Request를 통해 프로젝트 개발에 참여하시는 것도 매우 환영합니다~
 
-大家如果有什么有意思的界面/功能性需求,可以提在[此处](https://github.com/chengyangkj/Ros_Qt5_Gui_App/issues/29),如有Bug请提在[issues](https://github.com/chengyangkj/Ros_Qt5_Gui_App/issues),必将尽快修复!也非常欢迎大家发起Merge Request一起参与项目建设~
-
-此仓库国内加速镜像链接:[gitee](https://gitee.com/chengyangkj/Ros_Qt5_Gui_App)
+중국 내 미러 저장소 링크: [gitee](https://gitee.com/chengyangkj/Ros_Qt5_Gui_App)
 
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=chengyangkj/Ros_Qt5_Gui_App&type=Timeline&theme=dark" />
@@ -75,7 +73,8 @@
     <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=chengyangkj/Ros_Qt5_Gui_App&type=Timeline" width="75%" />
   </picture>
 
-*项目截图*
+# Start of Selection
+*프로젝트 스크린샷*
 
 ![image.png](./doc/images/main.png)
  
@@ -83,11 +82,11 @@
 
 ![mapping.png](./doc/images/mapping.gif)
 
-基于flutter的ROS1/ROS2跨平台移动机器人人机交互软件已正式开源:
+플러터 기반의 ROS1/ROS2 크로스 플랫폼 모바일 로봇 인간-기계 상호작용 소프트웨어가 공식적으로 오픈 소스되었습니다:
 ![flutter.png](./doc/images/flutter.png)
-如有需要请移步至[ROS_Flutter_Gui_App](https://github.com/chengyangkj/ROS_Flutter_Gui_App)
+필요하신 경우 [ROS_Flutter_Gui_App](https://github.com/chengyangkj/ROS_Flutter_Gui_App)로 이동해 주시기 바랍니다.
 
-*目录*
+*목차*
 
 <!-- TOC -->
 
@@ -121,21 +120,20 @@
 
 <!-- /TOC -->
 
-# 一,Release 版本下载使用
+# 一, Release 버전 다운로드 및 사용
 
-如果您只想使用本软件,并不想了解具体的代码实现,用户可以选择下载编译好的Release版本，不用自行手动编译,下载即用
+소프트웨어를 단순히 사용하고 싶고 코드 구현을 이해할 필요가 없다면, 컴파일된 Release 버전을 다운로드하여 바로 사용할 수 있습니다.
 
-使用Release版本的前提:==系统ROS环境已安装,并且source到环境变量中==
+Release 버전 사용 전제조건: ==시스템에 ROS 환경이 설치되어 있고 환경 변수에 source 되어 있어야 합니다==
 
-本仓库使用CI自动生成各平台的Release版本(目前只有X86_64版本,Arm环境需要自行编译),在项目的[Release页面](https://github.com/chengyangkj/Ros_Qt5_Gui_App/releases)下载最新对应ROS版本的Release版本，理论上解压后即可使用。
-使用方法:
-在终端进入解压后的文件夹路径,执行如下命令:
+이 저장소는 CI를 사용하여 각 플랫폼의 Release 버전을 자동 생성합니다(현재는 X86_64 버전만 제공, Arm 환경은 직접 컴파일 필요). 프로젝트의 [Release 페이지](https://github.com/chengyangkj/Ros_Qt5_Gui_App/releases)에서 해당 ROS 버전의 최신 Release를 다운로드하면 압축 해제 후 바로 사용할 수 있습니다.
 
+사용 방법:
+터미널에서 압축 해제된 폴더로 이동한 후 다음 명령어를 실행합니다:
 ```
 sudo chmod a+x ./ros_qt5_gui_app
 ./ros_qt5_gui_app
 ```
-如果Release版本下载后使用不了，可以参考[二,编译](#二编译)进行自行编译使用
 
 # 二,编译
 
