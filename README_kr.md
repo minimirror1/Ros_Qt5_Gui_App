@@ -73,7 +73,6 @@ Simplified Chinese | [한국어](./README_kr.md)
     <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=chengyangkj/Ros_Qt5_Gui_App&type=Timeline" width="75%" />
   </picture>
 
-# Start of Selection
 *프로젝트 스크린샷*
 
 ![image.png](./doc/images/main.png)
@@ -120,7 +119,7 @@ Simplified Chinese | [한국어](./README_kr.md)
 
 <!-- /TOC -->
 
-# 一, Release 버전 다운로드 및 사용
+# 1, Release 버전 다운로드 및 사용
 
 소프트웨어를 단순히 사용하고 싶고 코드 구현을 이해할 필요가 없다면, 컴파일된 Release 버전을 다운로드하여 바로 사용할 수 있습니다.
 
@@ -252,66 +251,65 @@ IDE가 없어도 텍스트 편집기만으로도 코드를 작성할 수 있습�
 
 이 프로젝트는 표준 CMake 프로젝트이므로 QtCreator에서 CMake 프로젝트를 여는 방식으로 프로젝트 루트 디렉토리의 CMakeLists.txt를 열면 됩니다(ROS1/ROS2 구분 없음)
 
-- 1.安装QtCreator
+- 1. QtCreator 설치
 
 ```
 sudo apt-get install qtcreator
-
 ```
-- 2.打开qtcreator
+
+- 2. QtCreator 실행
 
 终端输入(必须终端打开):
 
 ```
 qtcretor
 ```
-打开后选择文件->打开文件或项目:
+열기 후 파일->파일 또는 프로젝트 열기 선택:
 
 ![image.png](./doc/images/qtcreator/step1.jpg)
 
-接着选择项目==根目录==下的Cmakelist.txt文件,点击打开即可:
+그 다음 프로젝트 ==루트 디렉토리==의 CMakeLists.txt 파일을 선택하고 열기를 클릭하면 됩니다:
 
 ![image.png](./doc/images/qtcreator/step2.jpg)
 
-接着会自动识别我们前面编译的build目录,选择config:
+그러면 이전에 컴파일한 build 디렉토리를 자동으로 인식하고 config를 선택합니다:
 
 ![image.png](./doc/images/qtcreator/step3.jpg)
 
-项目成功展开,点击绿色三角形编译并运行:
+프로젝트가 성공적으로 열리면 녹색 삼각형을 클릭하여 컴파일 및 실행합니다:
 
 ![image.png](./doc/images/qtcreator/step4.jpg)
 
-# 四,使用说明
+# 4. 사용 설명
 
-## 4.1,多机通信配置
+## 4.1, 다중 머신 통신 설정
 
->💡  针对于ROS新手的温馨提示:此项配置,如果是单机使用即本软件运行在机器人身上,没有跨机器使用就不用配置，直接跳过即可.如果需要将本软件运行在自己的笔记本上,去连接远程的机器人的情况下需要进行配置
+>💡 ROS 초보자를 위한 팁: 이 설정은 소프트웨어가 로봇에서 단독으로 실행되는 경우, 즉 다른 머신과의 통신이 필요 없는 경우에는 설정할 필요가 없으며 건너뛰어도 됩니다. 노트북에서 이 소프트웨어를 실행하여 원격 로봇에 연결하려는 경우에만 설정이 필요합니다.
 
-
-ROS1/ROS2的多机通信完全依赖ROS原生(环境变量添加ROS_MASTER_URI与ROS_IP/ROS_DOMAINID),不再由用户手动指定,减轻新手使用负担
+ROS1/ROS2의 다중 머신 통신은 ROS 네이티브 환경 변수(ROS_MASTER_URI와 ROS_IP/ROS_DOMAINID)에 전적으로 의존하며, 사용자가 수동으로 지정할 필요가 없어 초보자의 부담을 줄였습니다.
 
 ROS1:
 
-配置参考：多机通讯教程[csdn 博客](https://blog.csdn.net/qq_38441692/article/details/98205852)
+설정 참조: 다중 머신 통신 튜토리얼 [csdn 블로그](https://blog.csdn.net/qq_38441692/article/details/98205852)
 
 ROS2:
 
-环境变量多机配置相同的ROS_DOMAINID
+환경 변수에서 동일한 ROS_DOMAINID 설정
 
-## 4.2,配置文件
+## 4.2, 설정 파일
 
-第一次运行后，会在可执行程序同级目录生成config.json,修改此配置文件即可(需要注意Json格式),修改后重启生效,具体配置说明详见各功能的配置说明
+첫 실행 후 실행 파일과 동일한 디렉토리에 config.json이 생성됩니다. 이 설정 파일을 수정하면 됩니다(JSON 형식에 주의). 수정 후 재시작하면 적용되며, 자세한 설정 설명은 각 기능의 설정 설명을 참조하세요.
 
+## 4.3, 위치 재설정 발행
 
-## 4.3,重定位位姿态发布
-
-程序可以拖动式的设置机器人初始位置（重定位）,相对于Rviz,拖动时可以实时查看激光匹配情况,重定位更加精准(左键按住拖动,右键旋转方向)
+프로그램에서는 드래그 방식으로 로봇의 초기 위치를 설정(재위치)할 수 있습니다. Rviz와 비교하여 드래그할 때 레이저 매칭 상태를 실시간으로 확인할 수 있어 더 정확한 위치 재설정이 가능합니다(왼쪽 버튼을 누른 채 드래그하고, 오른쪽 버튼으로 방향 회전).
 
 ![image.png](./doc/images/reloc.png)
 
 ![image.png](./doc/images/reloc.gif)
 
-注意:如果设置无效,需要检查config.json中设置：
+
+주의: 설정이 무효인 경우, config.json의 설정을 확인해야 합니다:
 
 ```
 {
@@ -320,22 +318,22 @@ ROS2:
       "enable": true
 }
 ```
-为自己机器人监听的重定位Topic名称
+자신의 로봇이 수신하는 재위치 Topic 이름으로 설정
 
 
-## 4.4,地图编辑
+## 4.4, 지도 편집
 
-程序支持地图编辑功能:
+프로그램은 지도 편집 기능을 지원합니다:
 
 ![image.png](./doc/images/edit_map.png)
 ![image.png](./doc/images/edit_map2.png)
 
-### 4.4.1 拓扑地图(机器人导航点设置)
-并且程序支持拓扑地图功能,可以拖动式的设置机器人导航目标点（导航）使用gif说明如下:
+### 4.4.1 토폴로지 맵(로봇 내비게이션 지점 설정)
+프로그램은 토폴로지 맵 기능을 지원하며, 드래그 방식으로 로봇의 내비게이션 목표 지점을 설정할 수 있습니다(내비게이션). 아래 GIF로 설명합니다:
 
 ![image.png](./doc/images/set_nav_goal.gif)
 
-注意:如果导航点位发布无响应设置无效,需要检查config.json中设置：
+주의: 내비게이션 지점 발행이 응답하지 않거나 설정이 무효인 경우, config.json의 설정을 확인해야 합니다:
 
 ```
 {
@@ -344,46 +342,46 @@ ROS2:
       "enable": true
 }
 ```
-为自己机器人监听的导航目标点Topic名称
+자신의 로봇이 수신하는 내비게이션 목표 지점 Topic 이름으로 설정
 
-### 4.4.2 橡皮擦
+### 4.4.2 지우개
 
-点击橡皮擦后,可以擦除地图中的障碍物,使用gif说明如下:
+지우개를 클릭하면 지도의 장애물을 지울 수 있습니다. GIF로 설명하면 다음과 같습니다:
 ![image.png](./doc/images/erase.gif)
 
-### 4.4.3 画笔
-画笔功能
+### 4.4.3 펜
+펜 기능
 ![image.png](./doc/images/pencil.gif)
 
-### 4.4.4 线段绘制
-线段绘制
+### 4.4.4 선 그리기
+선 그리기
 ![image.png](./doc/images/draw_line.gif)
 
-### 4.4.5 地图保存
+### 4.4.5 지도 저장
 
-地图编辑完成后并不会自动保存,需要点击保存按钮,保存地图到指定文件夹,如果需要在ROS中使用，需要将该地图替换到自己对应导航包的map中
+지도 편집이 완료되어도 자동으로 저장되지 않으므로, 저장 버튼을 클릭하여 지정된 폴더에 저장해야 합니다. ROS에서 사용하려면 해당 지도를 자신의 내비게이션 패키지의 map으로 교체해야 합니다.
 
-目前保存地图有如下:
+현재 저장되는 지도 파일은 다음과 같습니다:
 
-- *.pgm 图片数据
-- *.yaml 地图描述文件
-- *.topology 程序自定义的拓扑地图 保存了点位等信息
+- *.pgm 이미지 데이터
+- *.yaml 지도 설명 파일
+- *.topology 프로그램 사용자 정의 토폴로지 맵(위치 정보 등 저장)
 
 ![image.png](./doc/images/save_map.png)
 
-### 4.4.6 地图加载
+### 4.4.6 지도 불러오기
 
-地图加载同理 用户选择对应的PGM地图文件即可加载，并进行编辑
+지도 불러오기도 마찬가지로 사용자가 해당 PGM 지도 파일을 선택하면 불러와서 편집할 수 있습니다.
 
-## 4.5,手动控制机器人
+## 4.5, 로봇 수동 제어
 
-软件支持发布实时速度到底盘:
+소프트웨어는 실시간 속도를 로봇 베이스로 발행할 수 있습니다:
 
 ![image.png](./doc/images/manual_control.jpg)
 
-对应按钮上的文字，可以由键盘对应按钮同步调用
+버튼의 텍스트에 해당하는 키보드 버튼으로도 동시에 제어할 수 있습니다.
 
-注意:如果设置无效,需要检查config.json中设置：
+주의: 설정이 무효인 경우 config.json의 설정을 확인해야 합니다:
 
 ```
 {
@@ -393,15 +391,15 @@ ROS2:
 }
 
 ```
-为实际机器人监听的速度控制话题
+실제 로봇이 수신하는 속도 제어 Topic 이름으로 설정
 
-## 4.6,速度仪表盘
+## 4.6, 속도 대시보드
 
-软件支持实时显示机器人速度:
+소프트웨어는 로봇의 속도를 실시간으로 표시할 수 있습니다:
 
 ![image.png](./doc/images/speed_dashboard.jpg)
 
-注意:如果设置无效,需要检查config.json中设置：
+주의: 설정이 무효인 경우 config.json의 설정을 확인해야 합니다:
 
 ```
 {
@@ -411,11 +409,11 @@ ROS2:
 }
 ```
 
-为机器人时机发布的里程计话题
+로봇이 발행하는 오도메트리 토픽으로 설정
 
-## 4.7,电池电量显示
+## 4.7, 배터리 잔량 표시
 
-软件支持实时显示机器人电量,在配置中配置话题名，电池电量的Topic类型为:sensor_msgs::BatteryState
+소프트웨어는 로봇의 배터리 잔량을 실시간으로 표시할 수 있습니다. 설정에서 토픽 이름을 설정하면 되며, 배터리 잔량 토픽 타입은 sensor_msgs::BatteryState입니다.
 
 ```
 {
@@ -426,28 +424,28 @@ ROS2:
 ```
 ![image.png](./doc/images/battery_state.png)
 
-## 4.8 多点连续导航
+## 4.8 다중 지점 연속 내비게이션
 
-软件支持多点连续导航,使用方法如下:
+소프트웨어는 다중 지점 연속 내비게이션을 지원하며, 사용 방법은 다음과 같습니다:
 
 ![image.png](./doc/images/multi_nav.png)
 
-点击Start Task Chain即可开始任务:
+Start Task Chain을 클릭하면 작업이 시작됩니다:
 
 ![image.png](./doc/images/main.gif)
 
-## 4.9,相机图片显示
+## 4.9 카메라 이미지 표시
 
-软件支持实时显示机器人相机图片,在配置中配置话题名及location:
-
-```
-  "images": [ ], //图片列表 支持多路 配置后自动创建界面
+소프트웨어는 로봇 카메라 이미지를 실시간으로 표시할 수 있으며, 설정에서 토픽 이름과 위치를 설정하면 됩니다:
 
 ```
+  "images": [ ], //이미지 목록 - 다중 채널 지원, 설정 후 자동으로 인터페이스 생성
 
-软件移植了rqt image view的图片显示功能,支持实时显示多路机器人相机图片,在配置中配置话题名
+```
 
-配置demo:
+소프트웨어는 rqt image view의 이미지 표시 기능을 이식했으며, 다중 로봇 카메라 이미지를 실시간으로 표시할 수 있습니다. 설정에서 토픽 이름을 구성하면 됩니다.
+
+설정 예시:
 
 ```
 
@@ -471,22 +469,20 @@ ROS2:
 ![image.png](./doc/images/show_image.gif)
 
 
-## 4.10,机器人车身轮廓显示
+## 4.10, 로봇 차체 윤곽 표시
 
-车身尺寸位于配置:"robot_shape_config":
+차체 크기는 설정의 "robot_shape_config"에 있습니다:
 
 ``` 
-
   "robot_shape_config": {
-    "shaped_points": [],  //轮廓点
-    "is_ellipse": false,  //轮廓是否为椭圆
-    "color": "0x0000FF",   //轮廓填充颜色
-    "opacity": 0.5     //轮廓透明度
+    "shaped_points": [],  //윤곽점
+    "is_ellipse": false,  //윤곽이 타원인지 여부
+    "color": "0x0000FF",   //윤곽 채우기 색상
+    "opacity": 0.5     //윤곽 투명도
   }
-
 ```
 
-配置前，首先需要以车中心为原点，使用如下坐标系计算车身轮廓的每个点(单位m)，支持异形车身:
+설정하기 전에 먼저 차량 중심을 원점으로 하여 다음과 같은 좌표계를 사용하여 차체 윤곽의 각 점을 계산해야 합니다(단위: m). 비정형 차체도 지원됩니다:
 
 ```
 
@@ -512,11 +508,11 @@ y           |       |       |
 
 ```
 
-随意找一个点作为起始点,按照顺时针,依次填下每个点
+임의의 점을 시작점으로 선택하고, 시계 방향으로 각 점을 순서대로 입력합니다.
 
-配置demo:
+설정 예시:
 
-- 1m*1m车身:
+- 1m*1m 차체:
 
 ```
   "robot_shape_config": {
@@ -547,7 +543,7 @@ y           |       |       |
 
 ![image.png](./doc/images/shape1.png)
 
-- 1m*1m 圆形车身:
+- 1m*1m 원형 차체:
 
 is_ellipse=true
 
@@ -579,7 +575,7 @@ is_ellipse=true
 ```
 ![image.png](./doc/images/shape_cicle.png)
 
-- 异形车身:
+- 비정형 차체:
   
 ```
   "robot_shape_config": {
@@ -614,34 +610,34 @@ is_ellipse=true
 
 ![image.png](./doc/images/shape2.png)
 
-# 五,相关链接
+# 5,관련 링크
 
 
-| 链接名                                                                             | 支持平台                  | 功能                                                                                                   |
+| 링크명                                                                             | 지원 플랫폼                | 기능                                                                                                   |
 | ---------------------------------------------------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------ |
-| [master](https://github.com/chengyangkj/Ros_Qt5_Gui_App/tree/master)               | Win10 Ubuntu              | ROS + QWidget + QGraphicsview自绘制可视化界面显示                                                      |
-| [qml_hmi](https://github.com/chengyangkj/Ros_Qt5_Gui_App/tree/qml_hmi)             | Win10 Ubuntu              | ROS + QML + C++混合编程，qml自绘制地图，激光雷达可视化显示等demo                                       |
-| [simple](https://github.com/chengyangkj/Ros_Qt5_Gui_App/tree/simple)               | Win10 Ubuntu              | ROS + QWidget + Librviz进行可视化显示，为《ROS人机交互软件开发》系列课程中实现的版本，CSDN博客例程版本 |
-| [rviz_tree](https://github.com/chengyangkj/Ros_Qt5_Gui_App/tree/rviz_tree)         | Win10 Ubuntu              | ROS + QWidget + Librviz原生图层Api实现图层管理，不需手动创建图层                                       |
-| [ros_qt_demo](https://github.com/chengyangkj/Ros_Qt5_Gui_App/tree/ros_qt_demo)     | Win10 Ubuntu              | cakin_create_qt_pkg 创建的原始包，cmakelist.txt已配置好改为qt5，可以直接编译运行                       |
-| [ros2_qt_demo](https://github.com/chengyangkj/ros2_qt_demo)                        | ROS2                      | 在ROS2平台上运行的qt demo包，cmakelist.txt已配置好改为qt5，可以直接colcon build 编译使用               |
-| [ROS2_Qt5_Gui_App](https://github.com/chengyangkj/ROS2_Qt5_Gui_App)                | ROS2                      | 与本仓库代码完全相同/停止维护                                                                          |
-| [Flutter App](https://github.com/chengyangkj/Ros_Qt5_Gui_App/tree/ros_flutter_app) | 基于flutter实现多平台运行 | 逐步推进.....                                                                                          |
+| [master](https://github.com/chengyangkj/Ros_Qt5_Gui_App/tree/master)               | Win10 Ubuntu              | ROS + QWidget + QGraphicsview 자체 구현 시각화 인터페이스 표시                                          |
+| [qml_hmi](https://github.com/chengyangkj/Ros_Qt5_Gui_App/tree/qml_hmi)             | Win10 Ubuntu              | ROS + QML + C++ 혼합 프로그래밍, qml 자체 구현 지도, 라이다 시각화 표시 등 데모                         |
+| [simple](https://github.com/chengyangkj/Ros_Qt5_Gui_App/tree/simple)               | Win10 Ubuntu              | ROS + QWidget + Librviz 시각화 표시, 'ROS 인간-기계 상호작용 소프트웨어 개발' 시리즈 강좌 구현 버전, CSDN 블로그 예제 버전 |
+| [rviz_tree](https://github.com/chengyangkj/Ros_Qt5_Gui_App/tree/rviz_tree)         | Win10 Ubuntu              | ROS + QWidget + Librviz 네이티브 레이어 API로 레이어 관리 구현, 수동 레이어 생성 불필요                  |
+| [ros_qt_demo](https://github.com/chengyangkj/Ros_Qt5_Gui_App/tree/ros_qt_demo)     | Win10 Ubuntu              | cakin_create_qt_pkg로 생성된 원본 패키지, cmakelist.txt가 qt5로 설정되어 있어 바로 컴파일 실행 가능      |
+| [ros2_qt_demo](https://github.com/chengyangkj/ros2_qt_demo)                        | ROS2                      | ROS2 플랫폼에서 실행되는 qt 데모 패키지, cmakelist.txt가 qt5로 설정되어 있어 colcon build로 바로 컴파일 사용 가능 |
+| [ROS2_Qt5_Gui_App](https://github.com/chengyangkj/ROS2_Qt5_Gui_App)                | ROS2                      | 이 저장소 코드와 완전히 동일/유지보수 중단                                                               |
+| [Flutter App](https://github.com/chengyangkj/Ros_Qt5_Gui_App/tree/ros_flutter_app) | Flutter 기반 멀티플랫폼 실행 | 점진적으로 진행 중.....                                                                                |
 
 
-# 六,相关教程及交流群
+# 6. 관련 튜토리얼 및 커뮤니티
 
- **本系列教程文章专栏:**
+**본 시리즈 튜토리얼 전문 칼럼:**
 
-[ROS机器人GUI程序开发](https://blog.csdn.net/qq_38441692/category_9863968.html)
-[ROS2 Qt21天训练营(关注古月学院,不定期开营)](https://class.guyuehome.com/)
- **本系列课程已上线古月学院，欢迎感兴趣的小伙伴订阅：**
+[ROS 로봇 GUI 프로그램 개발](https://blog.csdn.net/qq_38441692/category_9863968.html)
+[ROS2 Qt 21일 트레이닝 캠프(고월학원 팔로우, 비정기 개강)](https://class.guyuehome.com/)
+**본 시리즈 강좌가 고월학원에 업로드되었습니다. 관심 있는 분들의 구독을 환영합니다:**
 
- 1. [ROS Qt开发环境搭建以及基础知识介绍](https://class.guyuehome.com/detail/p_5eba414d58533_Uh4XTbPi/6)
- 2. [ROS人机交互软件的界面开发](https://class.guyuehome.com/detail/p_5ec490a8d7bd7_b7ucPqUs/6)
- 3. [ROS Rviz组件开发方法](https://class.guyuehome.com/detail/p_5edf2d27a1942_foy4nqci/6)
- 4. [如何实现ROS windows人机交互软件](https://class.guyuehome.com/detail/p_5fc5ab97e4b04db7c091f475/6)
- 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200612194143186.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDQxNjky,size_16,color_FFFFFF,t_70)
+1. [ROS Qt 개발 환경 구축 및 기초 지식 소개](https://class.guyuehome.com/detail/p_5eba414d58533_Uh4XTbPi/6)
+2. [ROS 인간-기계 상호작용 소프트웨어의 인터페이스 개발](https://class.guyuehome.com/detail/p_5ec490a8d7bd7_b7ucPqUs/6)
+3. [ROS Rviz 컴포넌트 개발 방법](https://class.guyuehome.com/detail/p_5edf2d27a1942_foy4nqci/6)
+4. [ROS Windows 인간-기계 상호작용 소프트웨어 구현 방법](https://class.guyuehome.com/detail/p_5fc5ab97e4b04db7c091f475/6)
 
-**开发交流QQ群：** 797497206
+![이미지 설명](https://img-blog.csdnimg.cn/20200612194143186.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDQxNjky,size_16,color_FFFFFF,t_70)
+
+**개발 커뮤니티 QQ 그룹:** 797497206
