@@ -214,7 +214,7 @@ class SpeedCtrlWidget : public QWidget {
     checkBox_use_all_ = new QCheckBox();
     checkBox_use_all_->setObjectName(QString::fromUtf8("checkBox_use_all_"));
     checkBox_use_all_->setMaximumSize(QSize(90, 16777215));
-    checkBox_use_all_->setText("全向模式:");
+    checkBox_use_all_->setText("전방위 모드:");
     horizontalLayout_18->addWidget(checkBox_use_all_);
 
     QPushButton *pushButton_l = new QPushButton();
@@ -316,7 +316,7 @@ class SpeedCtrlWidget : public QWidget {
         QString::fromUtf8("horizontalLayout_20"));
     QLabel *label_14 = new QLabel();
     label_14->setObjectName(QString::fromUtf8("label_14"));
-    label_14->setText("角速度:");
+    label_14->setText("각속도:");
     horizontalLayout_20->addWidget(label_14);
 
     horizontalSlider_raw_ = new QSlider();
@@ -347,7 +347,7 @@ class SpeedCtrlWidget : public QWidget {
         QString::fromUtf8("horizontalLayout_21"));
     QLabel *label_9 = new QLabel();
     label_9->setObjectName(QString::fromUtf8("label_9"));
-    label_9->setText("线速度:");
+    label_9->setText("선속도:");
     horizontalLayout_21->addWidget(label_9);
 
     horizontalSlider_linear_ = new QSlider();
@@ -373,7 +373,7 @@ class SpeedCtrlWidget : public QWidget {
     QHBoxLayout *horizontalLayout_stop_button = new QHBoxLayout();
     QPushButton *btn_stop = new QPushButton();
     btn_stop->setObjectName(QString::fromUtf8("btn_stop"));
-    btn_stop->setText("停止(s)");
+    btn_stop->setText("정지(s)");
     btn_stop->setStyleSheet(
         "QPushButton {background-color: red; color: white; "
         "font-size: 14px;}"

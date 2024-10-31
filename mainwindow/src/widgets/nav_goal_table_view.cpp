@@ -14,10 +14,10 @@ NavGoalTableView::NavGoalTableView(QWidget *_parent_widget)
   table_model_ = new QStandardItemModel();
   setModel(table_model_);
   QStringList table_h_headers;
-  table_h_headers << "点位名"
-                  << "任务状态"
-                  << "删除"
-                  << "运行";
+  table_h_headers << "위치명"
+                  << "작업상태" 
+                  << "삭제"
+                  << "실행";
   QHeaderView *headerView = new QHeaderView(Qt::Horizontal);
   headerView->setSectionResizeMode(QHeaderView::ResizeToContents);
   headerView->setSelectionBehavior(QAbstractItemView::SelectRows);
