@@ -21,7 +21,7 @@ rclcomm::rclcomm() {
   SET_DEFAULT_TOPIC_NAME("LocalPlan", "/local_plan")
   SET_DEFAULT_TOPIC_NAME("Odometry", "/odom")
   SET_DEFAULT_TOPIC_NAME("Speed", "/cmd_vel")
-  SET_DEFAULT_TOPIC_NAME("Battery", "/battery")
+  SET_DEFAULT_TOPIC_NAME("Battery", "/battery_state")
   if (Config::ConfigManager::Instacnce()->GetRootConfig().images.empty()) {
     Config::ConfigManager::Instacnce()->GetRootConfig().images.push_back(
         Config::ImageDisplayConfig{.location = "front",
@@ -306,7 +306,7 @@ void rclcomm::path_callback(const nav_msgs::msg::Path::SharedPtr msg) {
   }
 }
 void rclcomm::laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg) {
-  // qDebug()<<"订阅到激光话题";
+  //LOG_INFO("레이저 토픽 구독됨");
   // std::cout<<"recv laser"<<std::endl;
   double angle_min = msg->angle_min;
   double angle_max = msg->angle_max;

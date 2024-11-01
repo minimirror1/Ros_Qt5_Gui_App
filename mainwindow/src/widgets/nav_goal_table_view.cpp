@@ -31,13 +31,16 @@ NavGoalTableView::NavGoalTableView(QWidget *_parent_widget)
           &NavGoalTableView::onItemChanged);
 }
 
-NavGoalTableView::~NavGoalTableView() {}
+NavGoalTableView::~NavGoalTableView() {//241101
+  StopTaskChain();
+  // 기존 sleep 제거 (더 이상 필요하지 않음)
+}
 
 void NavGoalTableView::onItemChanged(QStandardItem *item) {
   if (item->column() == 0) {
-    qDebug() << "点位名: " << item->text();
+    qDebug() << "위치명: " << item->text();
   } else if (item->column() == 2) {
-    qDebug() << "任务状态: " << item->checkState();
+    qDebug() << "작업상태: " << item->checkState();
   }
 }
 void NavGoalTableView::UpdateTopologyMap(const TopologyMap &_topology_map) {
@@ -80,9 +83,17 @@ void NavGoalTableView::AddItem() {
   setIndexWidget(table_model_->index(row, 2), button_remove);
   setIndexWidget(table_model_->index(row, 3), button_run);
 }
+
+// GUI 의 Task Tab -> Start Task 버튼 클릭시 호출되는 함수
 void NavGoalTableView::StartTaskChain(bool is_loop) {
   is_task_chain_running_ = true;
-  QtConcurrent::run([this, is_loop]() {
+  task_chain_future_ = QtConcurrent::run([this, is_loop]() {
+    // 모든 행의 상태를 "Wait"로 초기화
+    for (int row = 0; row < table_model_->rowCount(); ++row) {
+      QLabel *label_status = static_cast<QLabel *>(indexWidget(model()->index(row, 1)));
+      label_status->setText("Wait");
+    }
+
     do {
       for (int row = 0; row < table_model_->rowCount(); ++row) {
         QComboBox *comboBoxName =
@@ -99,9 +110,29 @@ void NavGoalTableView::StartTaskChain(bool is_loop) {
         RobotPose target_pose = point.ToRobotPose();
         emit signalSendNavGoal(target_pose);
         RobotPose diff = absoluteDifference(target_pose, robot_pose_);
-        while (diff.mod() > 0.2 || fabs(diff.theta) > deg2rad(15)) {
-          LOG_INFO("Task chain is running diff:" << diff << " mode:" << diff.mod() << " deg:" << rad2deg(fabs(diff.theta)));
+        while (diff.mod() > 0.3 || fabs(diff.theta) > deg2rad(15)) {
+          LOG_INFO("Task[" << row << "] chain is running point:" << comboBoxName->currentText().toStdString() << " diff:" << diff << " mode:" << diff.mod() << " deg:" << rad2deg(fabs(diff.theta)));
           diff = absoluteDifference(target_pose, robot_pose_);
+
+          // 로봇이 움직이지 않는 경우를 감지하기 위한 정적 변수
+          static RobotPose last_robot_pose = robot_pose_;
+          static int stationary_count = 0;
+          
+          // 로봇의 위치가 변하지 않았는지 확인
+          if (absoluteDifference(last_robot_pose, robot_pose_).mod() < 0.01) {
+            stationary_count++;
+            // 1초(10 * 100ms) 동안 움직임이 없으면 목표점 재전송
+            if (stationary_count >= 10) {
+              emit signalSendNavGoal(target_pose);
+              LOG_INFO("Task[" << row << "] retarget point:" << comboBoxName->currentText().toStdString());
+              stationary_count = 0;
+            }
+          } else {
+            stationary_count = 0;
+          }
+          
+          last_robot_pose = robot_pose_;
+
           if (!is_task_chain_running_) {
             emit signalTaskFinish();
             LOG_INFO("Task chain is stopped");
@@ -188,6 +219,11 @@ bool NavGoalTableView::SaveTaskChain(const std::string &name) {
 void NavGoalTableView::StopTaskChain() {
   if (is_task_chain_running_) {
     is_task_chain_running_ = false;
+        // 쓰레드가 완전히 종료될 때까지 대기
+    if (task_chain_future_.isRunning()) {
+      task_chain_future_.waitForFinished();
+    }
+    emit signalTaskFinish();//241101
   }
 }
 void NavGoalTableView::UpdateRobotPose(const RobotPose &pose) {
